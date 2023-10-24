@@ -1,4 +1,4 @@
-package com.example.hackerlordapp
+package com.example.hackerlordapp.ui.screens
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
