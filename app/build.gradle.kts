@@ -47,13 +47,21 @@ android {
 }
 
 dependencies {
-    //-----------------------------------------------------------------------Kamera
-    implementation ("androidx.camera:camera-core:1.4.0-alpha02")
-    implementation ("androidx.camera:camera-camera2:1.4.0-alpha02")
-    implementation ("androidx.camera:camera-lifecycle:1.4.0-alpha02")
-    implementation ("com.google.accompanist:accompanist-permissions:0.20.0")
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+    ///// LIFECYCLE /////
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2")
 
+    //// CAMERA STUFF ////
+    implementation ("androidx.camera:camera-camera2:1.3.0-alpha07")
+    implementation ("androidx.camera:camera-lifecycle:1.3.0-alpha07")
+    implementation ("androidx.camera:camera-view:1.3.0-alpha07")
+    implementation ("androidx.camera:camera-extensions:1.3.0-alpha07")
+
+    //// ACCOMPANIST ////
+    implementation ("com.google.accompanist:accompanist-permissions:0.20.0")
     //-----------------------------------------------------------------------
     implementation ("androidx.compose.ui:ui:1.0.5")
     implementation ("androidx.compose.material:material:1.0.5")
