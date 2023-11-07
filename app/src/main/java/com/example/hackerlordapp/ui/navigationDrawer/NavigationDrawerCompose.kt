@@ -1,11 +1,16 @@
 package com.example.hackerlordapp.ui.navigationDrawer
 
-import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,61 +24,96 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.hackerlordapp.ui.bottomBar.CustomBottomNavigation
-import com.example.hackerlordapp.ui.bottomBar.CustomBottomNavigationItem
-import com.example.hackerlordapp.ui.bottomBar.Screen
+import com.example.hackerlordapp.R
+import com.example.hackerlordapp.ui.theme.HackerLordAppTheme
 
 @Composable
 fun DrawerHeader() {
     Box(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
+            .height(300.dp) // Set the desired fixed height here
             .padding(vertical = 64.dp)
+            .background(Color.LightGray)
     ) {
-        Text(text = "Header", fontSize = 60.sp)
+        // Load the PNG image and display it using the Image composable
+        Image(
+            painter = painterResource(id = R.drawable.main_icon), // Replace with the correct resource ID
+            contentDescription = null,  // Provide a content description if needed
+            modifier = Modifier.fillMaxSize() // Fill the available space
+        )
     }
 }
+
 
 @Composable
 fun DrawerBody(
     items: List<MenuItem>,
-    modifier: Modifier.Companion = Modifier,
-    //itemTextStyle: TextStyle = androidx.compose.ui.text.TextStyle(fontSize = 18.sp),
+    modifier: Modifier = Modifier,
     onItemClick: (MenuItem) -> Unit
 ) {
     LazyColumn(modifier) {
         items(items) { item ->
             Row(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth() // Set the Row width to fill the parent
                     .clickable {
                         onItemClick(item)
                     }
                     .padding(16.dp)
             ) {
                 Icon(imageVector = item.icon, contentDescription = item.contentDescriptor)
+                Spacer(modifier = Modifier.width(16.dp))
+                Column {
+                    Text(
+                        text = item.title,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = item.contentDescriptor,
+                        style = TextStyle(color = Color.Gray)
+                    )
+                }
             }
-            Spacer(modifier = Modifier.width(16.dp))
-            Text(
-                text = item.title
-            )
         }
     }
 }
 
+
+// Example usage of DrawerBody:
+val menuItems = listOf(
+
+    MenuItem(
+        id = "settings",
+        title = "Settings",
+        contentDescriptor = "Navigate to Settings",
+        icon = Icons.Default.Settings
+    ),
+    MenuItem(
+        id = "help",
+        title = "Help",
+        contentDescriptor = "Give info",
+        icon = Icons.Default.Info
+    ),
+    MenuItem(
+        id = "logout",
+        title = "Logout",
+        contentDescriptor = "Navigate to login",
+        icon = Icons.Default.Lock
+    )
+)
+
+@Preview(showBackground = true)
 @Composable
-@Preview
-fun Prev1(){
+fun Preview() {
+    HackerLordAppTheme {
+        DrawerHeader()
 
-}
-
-@ExperimentalAnimationApi
-@Composable
-@Preview
-fun Prev2() {
-
+    }
 }
