@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-feature android:name="android.hardware.camera.autofocus" android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="true" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -19,13 +22,32 @@
         android:theme="@style/Theme.HackerLordApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.screens.HelpActivity"
+            android:exported="false"
+            android:label="@string/title_activity_help"
+            android:theme="@style/Theme.HackerLordApp" />
+        <activity
+            android:name=".ui.screens.CameraActivity"
+            android:exported="true"
+            android:label="cameraScreen"
+            android:theme="@style/Theme.HackerLordApp">
+        </activity>
+        <activity
+            android:name=".ui.screens.SettingsScreen"
+            android:exported="true"
+            android:label="settingScreen"
+            android:theme="@style/Theme.HackerLordApp"></activity>
+        <activity
             android:name=".ui.screens.MainActivity"
             android:exported="true"
+            android:label="mainScreen"
             android:theme="@style/Theme.HackerLordApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

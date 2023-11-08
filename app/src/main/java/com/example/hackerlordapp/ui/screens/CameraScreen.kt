@@ -23,16 +23,9 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 
 
-@Composable
-fun CameraScreen(
-    //viewModel: CameraViewModel = viewModel()
-) {
-    CameraContent()
-}
-
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "SuspiciousIndentation")
 @Composable
-private fun CameraContent() {
+fun CameraContent() {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val cameraController = remember { LifecycleCameraController(context) }
