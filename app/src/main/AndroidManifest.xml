@@ -38,7 +38,7 @@
             android:label="settingScreen"
             android:theme="@style/Theme.HackerLordApp"></activity>
         <activity
-            android:name=".ui.screens.MainActivity"
+            android:name=".ui.screens.MainScreen"
             android:exported="true"
             android:label="mainScreen"
             android:theme="@style/Theme.HackerLordApp">

@@ -1,5 +1,6 @@
 package com.example.hackerlordapp.ui.screens
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -21,6 +22,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import com.example.hackerlordapp.ui.components.NoPermissionScreen
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.PermissionState
+import com.google.accompanist.permissions.rememberPermissionState
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "SuspiciousIndentation")
@@ -35,8 +40,8 @@ fun CameraContent() {
             ExtendedFloatingActionButton(
                 text = { Text(text = "Take Photo") },
                 onClick = {
-                    val mainExectuer = ContextCompat.getMainExecutor(context)
-                    cameraController.takePicture(mainExectuer,
+                    val mainExecutor = ContextCompat.getMainExecutor(context)
+                    cameraController.takePicture(mainExecutor,
                         object : ImageCapture.OnImageCapturedCallback() {
                             override fun onCaptureSuccess(image: ImageProxy) {
                                 image.toBitmap()
@@ -60,5 +65,28 @@ fun CameraContent() {
                     cameraController.bindToLifecycle(lifecycleOwner)
                 }
             })
+    }
+}
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun CheckPermission() {
+    val cameraPermissionState: PermissionState =
+        rememberPermissionState(Manifest.permission.CAMERA)
+    ShowCamera(
+        hasPermission = cameraPermissionState.hasPermission,
+        onRequestPermission = cameraPermissionState::launchPermissionRequest
+    )
+}
+
+@Composable
+private fun ShowCamera(
+    hasPermission: Boolean,
+    onRequestPermission: () -> Unit
+) {
+    if (hasPermission) {
+        CameraContent()
+    } else {
+        NoPermissionScreen(onRequestPermission)
     }
 }

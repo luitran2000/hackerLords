@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -35,7 +34,7 @@ import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.rememberPermissionState
 import kotlinx.coroutines.launch
 
-class MainActivity : ComponentActivity() {
+class MainScreen : ComponentActivity() {
 
     @SuppressLint("UnrememberedMutableState", "UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +70,7 @@ class MainActivity : ComponentActivity() {
                             when(screen) {
                                 is Screen.Home -> navController.navigate("mainScreen")
                                 is Screen.Search -> navController.navigate("searchScreen")
-                                is Screen.Search -> navController.navigate("profileScreen")
+                                is Screen.Profile -> navController.navigate("profileScreen")
                                 // Add other screens as needed
                                 else -> {}
                             }
@@ -84,7 +83,7 @@ class MainActivity : ComponentActivity() {
                             MainContent(navController)
                         }
                         composable("cameraScreen") {
-                            checkPermission()
+                            CheckPermission()
                         }
                         composable("settingScreen") {
                             SettingContent()
@@ -93,6 +92,14 @@ class MainActivity : ComponentActivity() {
                             HelpContent()
                         }
                         composable("logoutScreen") {
+                            // Content for the logout screen
+                            // Replace with your actual logout screen content
+                        }
+                        composable("searchScreen") {
+                            // Content for the logout screen
+                            // Replace with your actual logout screen content
+                        }
+                        composable("profileScreen") {
                             // Content for the logout screen
                             // Replace with your actual logout screen content
                         }
@@ -131,28 +138,5 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-
-    @OptIn(ExperimentalPermissionsApi::class)
-    @Composable
-    fun checkPermission() {
-        val cameraPermissionState: PermissionState =
-            rememberPermissionState(android.Manifest.permission.CAMERA)
-        Main(
-            hasPermission = cameraPermissionState.hasPermission,
-            onRequestPermission = cameraPermissionState::launchPermissionRequest
-        )
-    }
-
-    @Composable
-    private fun Main(
-        hasPermission: Boolean,
-        onRequestPermission: () -> Unit
-    ) {
-        if (hasPermission) {
-            CameraContent()
-        } else {
-            NoPermissionScreen(onRequestPermission)
-        }
-    }
 }
 
